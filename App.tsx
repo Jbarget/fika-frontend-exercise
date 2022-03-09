@@ -1,11 +1,15 @@
 import { FC, useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import api from './api';
 import SearchBar from './components/SearchBar';
+import MoviesList from './components/MoviesList';
 import { Movie } from './types';
+import { getColor, getSpace } from './themeHelpers';
+import { StatusBar } from 'expo-status-bar';
 
 const App: FC = () => {
   const [hasError, setHasError] = useState(false);
+  const [isFetchingMovies, setIsFetchingMovies] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalMovies, setTotalMovies] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -13,6 +17,7 @@ const App: FC = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setIsFetchingMovies(true);
       try {
         const data = await api.fetchMovies();
         setMovies(data.results);
@@ -22,15 +27,19 @@ const App: FC = () => {
       } catch (e) {
         console.error(e);
         setHasError(true);
+      } finally {
+        setIsFetchingMovies(false);
       }
     };
 
     fetchMovies();
-  });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar />
+      <SearchBar totalMovies={totalMovies} resultsLength={movies.length} />
+
+      <MoviesList movies={movies} isFetchingMovies={isFetchingMovies} />
     </SafeAreaView>
   );
 };
@@ -38,8 +47,8 @@ const App: FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: getSpace(8),
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
