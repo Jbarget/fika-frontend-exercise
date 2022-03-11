@@ -7,11 +7,17 @@ import { getColor, getSpace } from '../themeHelpers';
 interface SearchBarProps {
   resultsLength: number;
   totalMovies: number;
+  onSearch: (searchTerm: string) => void;
 }
-const SearchBar: FC<SearchBarProps> = ({ resultsLength, totalMovies }) => {
+const SearchBar: FC<SearchBarProps> = ({
+  resultsLength,
+  totalMovies,
+  onSearch,
+}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const onChangeText = (text: string) => {
     setSearchTerm(text);
+    onSearch(text);
   };
 
   return (
@@ -20,6 +26,7 @@ const SearchBar: FC<SearchBarProps> = ({ resultsLength, totalMovies }) => {
         <Feather name='search' size={24} color={getColor('pewterBlue')} />
         <TextInput
           style={styles.input}
+          placeholder='Search...'
           value={searchTerm}
           onChangeText={onChangeText}
         />

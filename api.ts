@@ -23,9 +23,26 @@ const fetchGenres = async (): Promise<GenreData> => {
   }
 };
 
+const searchMovies = async ({
+  searchTerm,
+}: {
+  searchTerm: string;
+}): Promise<MoviesData> => {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1&include_adult=false&query=${searchTerm}`
+    );
+
+    return await res.json();
+  } catch (e) {
+    throw e;
+  }
+};
+
 const api = {
   fetchMovies,
   fetchGenres,
+  searchMovies,
 };
 
 export default api;

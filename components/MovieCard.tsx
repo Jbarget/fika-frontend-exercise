@@ -24,6 +24,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie, genres }) => {
       <View style={styles.movieInfo}>
         <Text style={styles.title}>{movie.title}</Text>
         <GenreList genreIds={movie.genre_ids} genres={genres} />
+        {/* TODO: display more info about the movie */}
       </View>
     </View>
   );
