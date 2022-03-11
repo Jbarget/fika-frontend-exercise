@@ -8,7 +8,7 @@ import { getSpace } from './themeHelpers';
 import { useDebouncedCallback } from 'use-debounce';
 
 const App: FC = () => {
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(true);
   const [isFetchingMovies, setIsFetchingMovies] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [genres, setGenres] = useState<GenreMap>({});
@@ -93,6 +93,7 @@ const App: FC = () => {
         totalMovies={totalMovies}
         resultsLength={movies.length}
         onSearch={onSearch}
+        hasError={hasError}
       />
       <MoviesList
         movies={movies}
