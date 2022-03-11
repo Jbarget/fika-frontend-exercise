@@ -1,16 +1,21 @@
 import React, { FC } from 'react';
 import { ActivityIndicator, FlatList, ListRenderItemInfo } from 'react-native';
-import { Movie } from '../types';
+import { GenreMap, Movie } from '../types';
 import MovieCard from './MovieCard';
 
 interface MoviesListProps {
   movies: Movie[];
+  genres: GenreMap;
   isFetchingMovies: boolean;
 }
 
-const MoviesList: FC<MoviesListProps> = ({ movies, isFetchingMovies }) => {
+const MoviesList: FC<MoviesListProps> = ({
+  movies,
+  isFetchingMovies,
+  genres,
+}) => {
   const renderItem = ({ item: movie }: ListRenderItemInfo<Movie>) => (
-    <MovieCard movie={movie} />
+    <MovieCard movie={movie} genres={genres} />
   );
 
   return isFetchingMovies ? (

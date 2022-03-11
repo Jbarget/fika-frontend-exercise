@@ -21,3 +21,14 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export type GenreMap = Record<number, Genre>;
+
+export interface GenreData {
+  genres: Genre[];
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
