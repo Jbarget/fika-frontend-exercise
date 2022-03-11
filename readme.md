@@ -6,7 +6,7 @@
 1. tada 🎉
 
 ### Things work on next (in no particular order)
-- Better looking error message
+- Better looking error message/better looking everything
 - pagination
 - display more info about the movie
 
