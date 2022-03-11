@@ -45,7 +45,7 @@ const App: FC = () => {
         console.error(e);
         setHasError(true);
       } finally {
-        // setIsFetchingMovies(false);
+        setIsFetchingMovies(false);
       }
     };
 
@@ -59,6 +59,7 @@ const App: FC = () => {
         movies={movies}
         isFetchingMovies={isFetchingMovies}
         genres={genres}
+        hasError={hasError}
       />
     </SafeAreaView>
   );
